@@ -3,9 +3,6 @@ import { FaRupeeSign } from 'react-icons/fa';
 import {MdOutlineDriveFileRenameOutline} from 'react-icons/md';
 import './App.css'
 
-// let data =[{name:"power bill", amount: 500, credit: "", debit: 500, date: Date(),total:1000},
-// {name:"power bill", amount: 500, credit: 500, debit: "", date: Date(),total:1500}];
-
 
 
 class App extends Component{
@@ -23,6 +20,9 @@ class App extends Component{
 //  
   creditAmount =() =>{
     const {name, amount, total} = this.state
+    if(name === "" || amount === ""){
+      alert("Enter valid Name and Amount")
+    }else{
     let update = localStorage.getItem("Todo")
     let parssed = JSON.parse(update)
     let date = new Date()
@@ -42,11 +42,15 @@ class App extends Component{
     localStorage.setItem('Todo', JSON.stringify(parssed))
     this.setState(prevState =>({total: prevState.total+parseInt(amount),name:"", amount:""}))
   }
+  }
 
 
 //
   debitAmount = () =>{
     const {name, amount, total} = this.state
+    if(name === "" || amount === ""){
+      alert("Enter valid Name and Amount")
+    }else{
     let update = localStorage.getItem("Todo")
     let parssed = JSON.parse(update)
     let date = new Date()
@@ -66,6 +70,7 @@ class App extends Component{
     localStorage.setItem('Todo', JSON.stringify(parssed))
     this.setState(prevState =>({total: prevState.total-parseInt(amount),name:"", amount:""}))
   }
+  }
 
 
   //
@@ -80,13 +85,13 @@ class App extends Component{
     }
     return(
       <table>
-      <tr>
-      <th>Name</th>
-      <th>Amount</th>
-      <th>Credit</th>
-      <th>Debit</th> 
-      <th>Date</th>
-      <th>Total Amount</th>
+       <tr>
+          <th>Name</th>
+          <th>Amount</th>
+          <th>Credit</th>
+          <th>Debit</th> 
+          <th>Date</th>
+          <th>Total Amount</th>
     </tr>
     {data.map(every =>{
       return(
